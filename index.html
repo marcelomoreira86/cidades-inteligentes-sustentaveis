@@ -1,57 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capim Grosso - Cidade Inteligente</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; background: #f0f2f5; }
-        header { background: #0d5a36; color: white; padding: 20px; text-align: center; }
-        .container { display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 10px; flex: 1; min-width: 250px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        #map { height: 500px; width: 100%; border-radius: 10px; flex: 2; min-width: 300px; }
-        .status-verde { color: green; font-weight: bold; }
-        .status-amarelo { color: orange; font-weight: bold; }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capim Grosso - Cidade Inteligente</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Dashboard - Mobilidade Urbana | Capim Grosso-BA</h1>
-        <p>Monitoramento em tempo real - Projeto Cidades Inteligentes e Sustentáveis</p>
-    </header>
-
-    <div class="container">
-        <div style="display:flex; flex-direction:column; gap:20px; flex:1;">
-            <div class="card">
-                <h3>🚦 Trânsito Centro</h3>
-                <p class="status-verde">● Fluindo</p>
-                <p>Av. ACM - Fluxo normal</p>
-            </div>
-            <div class="card">
-                <h3>🚌 Transporte Público</h3>
-                <p class="status-verde">● Operando</p>
-                <p>3 linhas ativas hoje</p>
-            </div>
-            <div class="card">
-                <h3>🌱 Qualidade do Ar</h3>
-                <p class="status-verde">● Boa - 32 AQI</p>
-                <p>Dados de sensores IoT</p>
-            </div>
-        </div>
-        <div id="map"></div>
-    </div>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Coordenadas de Capim Grosso-BA
-        var map = L.map('map').setView([-11.3800, -40.0120], 14);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        
-        // Marcadores
-        L.marker([-11.3800, -40.0120]).addTo(map).bindPopup("<b>Centro - Capim Grosso</b><br>Fluxo normal").openPopup();
-        L.marker([-11.3850, -40.0150]).addTo(map).bindPopup("Rodoviária<br>Ônibus em operação");
-        L.marker([-11.3750, -40.0080]).addTo(map).bindPopup("Prefeitura<br>Sensor de qualidade do ar: Bom");
-    </script>
+<header>
+<h1>Cidades Inteligentes e Sustentáveis</h1>
+<h2>Dashboard de Mobilidade Urbana - Capim Grosso - BA</h2>
+</header>
+<div class="container">
+  <div class="cards">
+    <div class="card"><h3>🚦 Tráfego</h3><p id="trafego"><b>Leve (45 km/h)</b></p><small>Av. ACM - Dados IoT</small></div>
+    <div class="card"><h3>🚌 Transporte</h3><p><b>4 ônibus ativos</b></p><small>GPS em tempo real</small></div>
+    <div class="card"><h3>💡 Energia</h3><p><b>92% LED Inteligente</b></p><small>Economia de 32%</small></div>
+    <div class="card"><h3>🌿 Ar</h3><p><b>AQI 42 - Boa</b></p><small>Sensor Praça da Prefeitura</small></div>
+  </div>
+  <div id="map"></div>
+  <section>
+    <h2>🎯 Objetivos</h2>
+    <p>Analisar e propor soluções de cidades inteligentes para Capim Grosso, focando em mobilidade sustentável, economia de energia e participação cidadã com IoT e dados abertos.</p>
+    <h2>💡 Propostas Sustentáveis</h2>
+    <ul>
+      <li><b>Iluminação Inteligente:</b> Postes com sensor de presença</li>
+      <li><b>Coleta Seletiva Inteligente:</b> Lixeiras com sensor de nível</li>
+      <li><b>App Cidadão CG:</b> App para reportar buracos, ônibus e iluminação</li>
+    </ul>
+  </section>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
