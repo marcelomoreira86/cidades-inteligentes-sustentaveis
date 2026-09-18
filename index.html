@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capim Grosso - Cidade Inteligente</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="stylesheet" href="style.css">
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f0f7f4}
+header{background:#0d5a36;color:white;padding:30px;text-align:center}
+.container{max-width:1100px;margin:auto;padding:20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
+.card h3{color:#0d5a36;margin-top:0}
+#map{height:480px;border-radius:12px;margin-top:20px;border:2px solid #0d5a36}
+section{background:white;padding:25px;border-radius:12px;margin-top:25px;line-height:1.6}
+</style>
 </head>
 <body>
 <header>
-<h1>Cidades Inteligentes e Sustentáveis</h1>
-<h2>Dashboard de Mobilidade Urbana - Capim Grosso - BA</h2>
+<h1>Cidades Inteligentes e Sustentaveis</h1>
+<p>Dashboard de Mobilidade Urbana - Capim Grosso - BA</p>
+<p><a href="https://marcelomoreira86.github.io/cidades-inteligentes-sustentaveis/" style="color:#aaffcc">Link do Projeto no Ar</a></p>
 </header>
 <div class="container">
-  <div class="cards">
-    <div class="card"><h3>🚦 Tráfego</h3><p id="trafego"><b>Leve (45 km/h)</b></p><small>Av. ACM - Dados IoT</small></div>
-    <div class="card"><h3>🚌 Transporte</h3><p><b>4 ônibus ativos</b></p><small>GPS em tempo real</small></div>
-    <div class="card"><h3>💡 Energia</h3><p><b>92% LED Inteligente</b></p><small>Economia de 32%</small></div>
-    <div class="card"><h3>🌿 Ar</h3><p><b>AQI 42 - Boa</b></p><small>Sensor Praça da Prefeitura</small></div>
-  </div>
-  <div id="map"></div>
-  <section>
-    <h2>🎯 Objetivos</h2>
-    <p>Analisar e propor soluções de cidades inteligentes para Capim Grosso, focando em mobilidade sustentável, economia de energia e participação cidadã com IoT e dados abertos.</p>
-    <h2>💡 Propostas Sustentáveis</h2>
-    <ul>
-      <li><b>Iluminação Inteligente:</b> Postes com sensor de presença</li>
-      <li><b>Coleta Seletiva Inteligente:</b> Lixeiras com sensor de nível</li>
-      <li><b>App Cidadão CG:</b> App para reportar buracos, ônibus e iluminação</li>
-    </ul>
-  </section>
+<div class="cards">
+<div class="card"><h3>Trafego</h3><p id="trafego"><b>Leve (45 km/h)</b></p><small>Av. ACM - Sensor IoT</small></div>
+<div class="card"><h3>Transporte</h3><p><b>4 onibus ativos</b></p><small>GPS tempo real</small></div>
+<div class="card"><h3>Energia</h3><p><b>92% LED Inteligente</b></p><small>Economia 32%</small></div>
+<div class="card"><h3>Qualidade do Ar</h3><p><b>AQI 42 - Boa</b></p><small>Sensor Praca Central</small></div>
+</div>
+<div id="map"></div>
+<section>
+<h2>Objetivos</h2>
+<p>Projeto academico sobre uso de tecnologia e sustentabilidade na gestao urbana de Capim Grosso - BA, propondo solucoes de mobilidade, iluminacao e participacao cidada.</p>
+<h2>Propostas</h2>
+<ul>
+<li>Iluminacao publica inteligente com sensor de presenca</li>
+<li>Pontos de onibus com painel solar e WiFi</li>
+<li>Aplicativo Cidadao CG para reportar problemas urbanos</li>
+</ul>
+</section>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js"></script>
+<script>
+const map = L.map('map').setView([-11.3806, -40.0126], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.marker([-11.3806, -40.0126]).addTo(map).bindPopup("<b>Centro - Capim Grosso</b>").openPopup();
+</script>
 </body>
 </html>
