@@ -1,9 +1,0 @@
-:root{--verde:#0d5a36;--claro:#f0f7f4}
-body{margin:0;font-family:'Segoe UI',Arial;background:var(--claro);color:#333}
-header{background:var(--verde);color:white;padding:30px;text-align:center}
-.container{max-width:1100px;margin:auto;padding:20px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-.card{background:white;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
-.card h3{margin-top:0;color:var(--verde)}
-#map{height:480px;border-radius:12px;margin-top:20px;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-section{background:white;padding:25px;border-radius:12px;margin-top:25px}
