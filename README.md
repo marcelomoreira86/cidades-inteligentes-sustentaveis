@@ -1,22 +1,16 @@
 # 🌿 Cidades Inteligentes e Sustentáveis
 
-> Dashboard de mobilidade urbana que une trânsito em tempo real + sustentabilidade.
+Dashboard de mobilidade urbana que monitora tráfego em tempo real e calcula impacto ambiental.
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
-![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet)
+### Funcionalidades Implementadas
+- Mapa interativo com React-Leaflet
+- Filtro por status de tráfego
+- **Cálculo de CO2 por trecho (sustentabilidade)**
+- Sugestão de rota ecológica
+- Busca por rua
 
-### 🚀 Funcionalidades
-- 🗺️ Mapa interativo em tempo real (React-Leaflet)
-- 🚦 Filtros: Livre, Lento, Congestionado
-- 🌱 **Cálculo de emissão de CO2** por via
-- 🔍 Busca inteligente por rua
-- ♻️ Sugestão de rota com menor impacto
+### Tecnologias
+React, Leaflet, Node.js, Express
 
-### 📊 Impacto Sustentável
-Ruas congestionadas emitem até 3x mais CO2. O projeto identifica gargalos e propõe alternativas.
-
-### ▶️ Como rodar
-`cd frontend && npm install && npm start`
-`cd backend && npm install && npm start`
-
-Feito por Marcelo Moreira - Capim Grosso/BA para o projeto de Cidades Inteligentes.
+### Como rodar local
+cd frontend && npm install && npm start
