@@ -19,4 +19,4 @@ Ruas congestionadas emitem até 3x mais CO2. O projeto identifica gargalos e pro
 `cd frontend && npm install && npm start`
 `cd backend && npm install && npm start`
 
-Feito por [Marcelo Moreira - Capim Grosso/BA] para o projeto de Cidades Inteligentes.
+Feito por Marcelo Moreira - Capim Grosso/BA para o projeto de Cidades Inteligentes.
