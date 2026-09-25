@@ -34,4 +34,4 @@ app.get('/api/transito', (req, res) => {
 
 app.get('/', (req, res) => res.send('API Cidades Inteligentes rodando 🌱'));
 
-app.listen(3000, () => console.log('Backend rodando em http://localhost:3000'));
+app.listen(3001, () => console.log('Backend rodando em http://localhost:3001'));
