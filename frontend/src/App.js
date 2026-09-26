@@ -8,29 +8,33 @@ function App() {
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
     { nome: 'Suburbana', coords: [[-12.87, -38.466], [-12.90, -38.475], [-12.92, -38.487], [-12.94, -38.494], [-12.97, -38.505]], status: 'livre', co2: '1.2 kg' },
-    // ORLA - AV. OTÁVIO MANGABEIRA - BEIRANDO CURVA POR CURVA
-    { nome: 'Orla - Av. Otávio Mangabeira', coords: [
-      [-12.935, -38.358], // Itapuã
-      [-12.944, -38.368], // Piatã
-      [-12.952, -38.376], // Patamares início
-      [-12.960, -38.385], // Patamares meio
-      [-12.967, -38.393], // Jaguaribe
-      [-12.974, -38.401], // Pituaçu
-      [-12.981, -38.410], // Boca do Rio início
-      [-12.987, -38.420], // Boca do Rio
-      [-12.992, -38.430], // Imbuí / Armação
-      [-12.997, -38.440], // Armação
-      [-13.002, -38.451], // Costa Azul
-      [-13.006, -38.460], // Pituba
-      [-13.010, -38.470], // Amaralina início
-      [-13.014, -38.482], // Amaralina
-      [-13.016, -38.493], // Rio Vermelho início
-      [-13.015, -38.503], // Rio Vermelho
-      [-13.012, -38.513], // Ondina início
-      [-13.008, -38.523], // Ondina
-      [-13.004, -38.531], // Barra início
-      [-13.010, -38.533]  // Farol da Barra
-    ], status: 'livre', co2: '0.9 kg' },
+    // ORLA - ESQUEMA SUBURBANA - 400M PRA DENTRO, 100% NA AVENIDA
+    { 
+      nome: 'Orla - Barra / Itapuã', 
+      coords: [
+        [-13.003, -38.525], // Farol da Barra - DENTRO
+        [-12.998, -38.522], // Morro do Cristo
+        [-13.000, -38.514], // Ondina - Av. Oceânica
+        [-13.003, -38.506], // Ondina / Rio Vermelho
+        [-13.006, -38.498], // Paciência
+        [-13.007, -38.490], // Buracão / Santana
+        [-13.005, -38.482], // Amaralina - quartel
+        [-13.002, -38.473], // Amaralina
+        [-12.998, -38.463], // Pituba - Octávio Mangabeira
+        [-12.993, -38.452], // Praça Namorados
+        [-12.988, -38.442], // Jardim de Alah / Costa Azul
+        [-12.983, -38.433], // Armação
+        [-12.977, -38.424], // Boca do Rio
+        [-12.970, -38.414], // Pituaçu
+        [-12.962, -38.404], // Jaguaribe
+        [-12.955, -38.394], // Patamares
+        [-12.947, -38.383], // Piatã
+        [-12.939, -38.372], // Itapuã
+        [-12.932, -38.361]  // Farol Itapuã - DENTRO
+      ], 
+      status: 'livre', 
+      co2: '0.9 kg' 
+    },
     { nome: 'Centro', coords: [[-12.971, -38.512], [-12.975, -38.514], [-12.978, -38.511]], status: 'congestionado', co2: '3.8 kg' },
     { nome: 'Garibaldi', coords: [[-13.002, -38.514], [-12.996, -38.51], [-12.988, -38.503]], status: 'moderado', co2: '2.0 kg' },
     { nome: 'Centenário / Barra', coords: [[-12.99, -38.505], [-12.998, -38.515], [-13.005, -38.525]], status: 'livre', co2: '1.0 kg' },
@@ -61,4 +65,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
