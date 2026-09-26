@@ -11,26 +11,27 @@ function App() {
     {
       nome: 'Suburbana',
       coords: [
-        [-12.970, -38.510], // Comércio
-        [-12.945, -38.504], // Calçada / Roma
-        [-12.920, -38.495], // Lobato
-        [-12.895, -38.482], // Plataforma
-        [-12.870, -38.470], // Periperi
-        [-12.845, -38.455], // Paripe
+        [-12.970, -38.510],
+        [-12.945, -38.504],
+        [-12.920, -38.495],
+        [-12.895, -38.482],
+        [-12.870, -38.470],
+        [-12.845, -38.455],
       ],
       status: 'livre',
       co2: '1.2 kg',
     },
-    // ORLA - ORDEM CORRIGIDA SUL -> NORTE - LINHA ÚNICA
+    // ORLA - FINAL UNIDA - UM SÓ TRAÇO DA BARRA ATÉ ITAPUÃ
     {
       nome: 'Orla - Barra / Itapuã',
       coords: [
-        [-13.00632, -38.45888], // 1 Pituba - sul
-        [-12.99636, -38.44289], // 2 Amaralina
-        [-12.98803, -38.43578], // 3 Costa Azul
-        [-12.96873, -38.40765], // 4 Pituaçu / Boca do Rio
-        [-12.95409, -38.38345], // 5 Armação
-        [-12.95393, -38.38157], // 6 Piatã / Itapuã - norte
+        [-12.997, -38.515], // Barra / Ondina
+        [-12.990, -38.498], // Rio Vermelho
+        [-12.980, -38.472], // Amaralina
+        [-12.970, -38.448], // Pituba
+        [-12.960, -38.425], // Armação / Boca do Rio
+        [-12.945, -38.395], // Piatã
+        [-12.933, -38.365], // Itapuã
       ],
       status: 'livre',
       co2: '0.9 kg',
