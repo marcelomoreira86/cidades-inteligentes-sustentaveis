@@ -8,22 +8,20 @@ function App() {
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
     { nome: 'Suburbana', coords: [[-12.87, -38.466], [-12.90, -38.475], [-12.92, -38.487], [-12.94, -38.494], [-12.97, -38.505]], status: 'livre', co2: '1.2 kg' },
-    // ORLA FINAL - 14 PONTOS COLADOS NA RUA, DE ITAPUÃ ATÉ BARRA
+    // ORLA 100% NA RUA - AGORA DENTRO
     { nome: 'Orla Salvador', coords: [
-      [-12.949, -38.354], // Itapuã
-      [-12.957, -38.365], // Piatã começo
-      [-12.965, -38.378], // Piatã
-      [-12.973, -38.392], // Plakaford
-      [-12.982, -38.406], // Jaguaribe
-      [-12.989, -38.421], // Patamares
-      [-12.994, -38.437], // Pituaçu
-      [-12.998, -38.452], // Boca do Rio
-      [-13.003, -38.467], // Costa Azul
-      [-13.008, -38.482], // Amaralina
-      [-13.012, -38.497], // Rio Vermelho
-      [-13.009, -38.510], // Ondina
-      [-13.003, -38.524], // Ondina - Barra
-      [-13.009, -38.534]  // Barra Farol
+      [-12.934, -38.373], // Itapuã - DENTRO
+      [-12.944, -38.389], // Piatã
+      [-12.955, -38.403], // Patamares
+      [-12.966, -38.418], // Jaguaribe
+      [-12.977, -38.432], // Pituaçu
+      [-12.987, -38.445], // Boca do Rio
+      [-12.995, -38.458], // Imbuí
+      [-13.002, -38.472], // Costa Azul / Amaralina
+      [-13.006, -38.488], // Rio Vermelho
+      [-13.005, -38.505], // Ondina
+      [-13.001, -38.520], // Ondina / Barra
+      [-13.009, -38.531]  // Barra
     ], status: 'livre', co2: '0.9 kg' },
     { nome: 'Centro', coords: [[-12.971, -38.512], [-12.975, -38.514], [-12.978, -38.511]], status: 'congestionado', co2: '3.8 kg' },
     { nome: 'Garibaldi', coords: [[-13.002, -38.514], [-12.996, -38.51], [-12.988, -38.503]], status: 'moderado', co2: '2.0 kg' },
@@ -42,10 +40,10 @@ function App() {
         <button onClick={() => setFiltro('moderado')} style={{marginLeft:5}}>Moderadas</button>
         <button onClick={() => setFiltro('congestionado')} style={{marginLeft:5}}>Engarrafadas</button>
       </div>
-      <MapContainer center={[-12.97, -38.51]} zoom={11.8} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.97, -38.48]} zoom={12} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {filtradas.map((r, i) => (
-          <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={6} opacity={0.9}>
+          <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={7} opacity={0.9}>
             <Popup><b>{r.nome}</b><br/>{r.status}<br/>CO2: {r.co2}</Popup>
           </Polyline>
         ))}
