@@ -4,14 +4,27 @@ import 'leaflet/dist/leaflet.css';
 
 function App() {
   const rotas = [
-    // PARALELA - corrigida pra dentro
     { nome: 'Av. Paralela', coords: [[-12.912, -38.345], [-12.932, -38.37], [-12.947, -38.398], [-12.962, -38.42], [-12.975, -38.445], [-12.985, -38.465]], status: 'congestionado', co2: '4.2 kg' },
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
-    // SUBURBANA - AGORA DENTRO DA TERRA, NÃO NO MAR DA BAÍA
     { nome: 'Suburbana', coords: [[-12.87, -38.466], [-12.90, -38.475], [-12.92, -38.487], [-12.94, -38.494], [-12.97, -38.505]], status: 'livre', co2: '1.2 kg' },
-    // ORLA - AGORA 100% DENTRO DA CIDADE, COLADA NA AVENIDA OTAVIO MANGABEIRA
-    { nome: 'Orla Salvador', coords: [[-12.948, -38.352], [-12.961, -38.368], [-12.974, -38.385], [-12.986, -38.408], [-12.996, -38.435], [-13.005, -38.455], [-13.010, -38.48], [-13.008, -38.505], [-13.001, -38.522], [-13.007, -38.533]], status: 'livre', co2: '0.9 kg' },
+    // ORLA FINAL - 14 PONTOS COLADOS NA RUA, DE ITAPUÃ ATÉ BARRA
+    { nome: 'Orla Salvador', coords: [
+      [-12.949, -38.354], // Itapuã
+      [-12.957, -38.365], // Piatã começo
+      [-12.965, -38.378], // Piatã
+      [-12.973, -38.392], // Plakaford
+      [-12.982, -38.406], // Jaguaribe
+      [-12.989, -38.421], // Patamares
+      [-12.994, -38.437], // Pituaçu
+      [-12.998, -38.452], // Boca do Rio
+      [-13.003, -38.467], // Costa Azul
+      [-13.008, -38.482], // Amaralina
+      [-13.012, -38.497], // Rio Vermelho
+      [-13.009, -38.510], // Ondina
+      [-13.003, -38.524], // Ondina - Barra
+      [-13.009, -38.534]  // Barra Farol
+    ], status: 'livre', co2: '0.9 kg' },
     { nome: 'Centro', coords: [[-12.971, -38.512], [-12.975, -38.514], [-12.978, -38.511]], status: 'congestionado', co2: '3.8 kg' },
     { nome: 'Garibaldi', coords: [[-13.002, -38.514], [-12.996, -38.51], [-12.988, -38.503]], status: 'moderado', co2: '2.0 kg' },
     { nome: 'Centenário / Barra', coords: [[-12.99, -38.505], [-12.998, -38.515], [-13.005, -38.525]], status: 'livre', co2: '1.0 kg' },
@@ -29,7 +42,7 @@ function App() {
         <button onClick={() => setFiltro('moderado')} style={{marginLeft:5}}>Moderadas</button>
         <button onClick={() => setFiltro('congestionado')} style={{marginLeft:5}}>Engarrafadas</button>
       </div>
-      <MapContainer center={[-12.97, -38.51]} zoom={11.5} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.97, -38.51]} zoom={11.8} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {filtradas.map((r, i) => (
           <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={6} opacity={0.9}>
