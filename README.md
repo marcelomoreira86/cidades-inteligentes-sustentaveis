@@ -1,16 +1,20 @@
-# 🌿 Cidades Inteligentes e Sustentáveis
+# 🌿 Cidades Inteligentes e Sustentáveis - Salvador
 
-Dashboard de mobilidade urbana que monitora tráfego em tempo real e calcula impacto ambiental.
+Projeto que usa mapa interativo para monitorar tráfego e reduzir emissão de CO2, alinhado aos ODS da ONU.
 
-### Funcionalidades Implementadas
-- Mapa interativo com React-Leaflet
-- Filtro por status de tráfego
-- **Cálculo de CO2 por trecho (sustentabilidade)**
-- Sugestão de rota ecológica
-- Busca por rua
+**Tecnologias:** React.js + Leaflet + Node.js + OpenStreetMap
 
-### Tecnologias
-React, Leaflet, Node.js, Express
+**Funcionalidades:**
+1.  **Mapa em tempo real:** Mostra a cidade de Salvador com dados reais do OpenStreetMap.
+2.  **Filtro de Tráfego:** O sistema classifica as vias por cor:
+    *   🟢 Verde = Rua Livre (baixa emissão)
+    *   🔴 Vermelho = Congestionada (alta emissão)
+3.  **Cálculo de CO2:** Ao clicar na rota, exibe a estimativa de CO2 emitido naquele trecho.
+4.  **Rota Ecológica:** O usuário pode escolher o caminho menos poluente.
 
-### Como rodar local
-cd frontend && npm install && npm start
+**Impacto Sustentável:**
+O projeto ajuda o cidadão e a prefeitura a evitar engarrafamentos, diminuindo o tempo no trânsito, o consumo de combustível e a poluição do ar.
+
+**Como rodar:**
+- `backend`: npm install && node server.js
+- `frontend`: npm install && npm start
