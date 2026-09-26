@@ -8,20 +8,28 @@ function App() {
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
     { nome: 'Suburbana', coords: [[-12.87, -38.466], [-12.90, -38.475], [-12.92, -38.487], [-12.94, -38.494], [-12.97, -38.505]], status: 'livre', co2: '1.2 kg' },
-    // ORLA - AV. OTÁVIO MANGABEIRA - FINAL NA MOSCA - 100% NA AVENIDA
+    // ORLA - AV. OTÁVIO MANGABEIRA - BEIRANDO CURVA POR CURVA
     { nome: 'Orla - Av. Otávio Mangabeira', coords: [
-      [-12.940, -38.368],
-      [-12.950, -38.383],
-      [-12.960, -38.398],
-      [-12.970, -38.413],
-      [-12.980, -38.428],
-      [-12.990, -38.443],
-      [-12.998, -38.459],
-      [-13.005, -38.475],
-      [-13.010, -38.492],
-      [-13.008, -38.508],
-      [-13.003, -38.524],
-      [-13.009, -38.535]
+      [-12.935, -38.358], // Itapuã
+      [-12.944, -38.368], // Piatã
+      [-12.952, -38.376], // Patamares início
+      [-12.960, -38.385], // Patamares meio
+      [-12.967, -38.393], // Jaguaribe
+      [-12.974, -38.401], // Pituaçu
+      [-12.981, -38.410], // Boca do Rio início
+      [-12.987, -38.420], // Boca do Rio
+      [-12.992, -38.430], // Imbuí / Armação
+      [-12.997, -38.440], // Armação
+      [-13.002, -38.451], // Costa Azul
+      [-13.006, -38.460], // Pituba
+      [-13.010, -38.470], // Amaralina início
+      [-13.014, -38.482], // Amaralina
+      [-13.016, -38.493], // Rio Vermelho início
+      [-13.015, -38.503], // Rio Vermelho
+      [-13.012, -38.513], // Ondina início
+      [-13.008, -38.523], // Ondina
+      [-13.004, -38.531], // Barra início
+      [-13.010, -38.533]  // Farol da Barra
     ], status: 'livre', co2: '0.9 kg' },
     { nome: 'Centro', coords: [[-12.971, -38.512], [-12.975, -38.514], [-12.978, -38.511]], status: 'congestionado', co2: '3.8 kg' },
     { nome: 'Garibaldi', coords: [[-13.002, -38.514], [-12.996, -38.51], [-12.988, -38.503]], status: 'moderado', co2: '2.0 kg' },
@@ -42,7 +50,7 @@ function App() {
         <button onClick={() => setFiltro('moderado')} style={{marginLeft:5}}>Moderadas</button>
         <button onClick={() => setFiltro('congestionado')} style={{marginLeft:5}}>Engarrafadas</button>
       </div>
-      <MapContainer center={[-12.97, -38.48]} zoom={11.8} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.97, -38.44]} zoom={12} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {filtradas.map((r, i) => (
           <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={7} opacity={0.95}>
@@ -53,5 +61,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
