@@ -7,33 +7,30 @@ function App() {
     { nome: 'Av. Paralela', coords: [[-12.912, -38.345], [-12.932, -38.37], [-12.947, -38.398], [-12.962, -38.42], [-12.975, -38.445], [-12.985, -38.465]], status: 'congestionado', co2: '4.2 kg' },
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
-    // SUBURBANA - CURVADA CERTINHO NA BAÍA
+    // SUBURBANA - CURTA, SÓ ATÉ PARIPE
     {
       nome: 'Suburbana',
       coords: [
-        [-12.970, -38.510], // Comércio
-        [-12.945, -38.504], // Calçada / Roma
-        [-12.920, -38.495], // Lobato
-        [-12.895, -38.482], // Plataforma
-        [-12.870, -38.470], // Periperi
-        [-12.845, -38.455], // Paripe
+        [-12.970, -38.510],
+        [-12.945, -38.504],
+        [-12.920, -38.495],
+        [-12.895, -38.482],
+        [-12.870, -38.470],
+        [-12.845, -38.455],
       ],
       status: 'livre',
       co2: '1.2 kg',
     },
-    // ORLA - 100% DENTRO, SEM MAR - ESQUEMA QUE DEU CERTO NA SUBURBANA
+    // ORLA - COORDENADAS OFICIAIS DOS CORREIOS - 100% NA AVENIDA
     {
       nome: 'Orla - Barra / Itapuã',
       coords: [
-        [-12.996, -38.514], // Barra - DENTRO da cidade
-        [-12.992, -38.500], // Ondina
-        [-12.988, -38.485], // Rio Vermelho
-        [-12.981, -38.467], // Amaralina
-        [-12.973, -38.450], // Pituba
-        [-12.963, -38.432], // Armação / Boca do Rio
-        [-12.952, -38.412], // Pituaçu / Jaguaribe
-        [-12.939, -38.390], // Patamares / Piatã
-        [-12.927, -38.367], // Itapuã
+        [-12.99636, -38.44289], // Amaralina - oficial【6390795508677556001†L600-L603】
+        [-13.00632, -38.45888], // Pituba - oficial【6390795508677556001†L637-L640】
+        [-12.98803, -38.43578], // Costa Azul - Plaza
+        [-12.95409, -38.38345], // Armação - oficial【6390795508677556001†L227-L230】
+        [-12.96873, -38.40765], // Pituaçu - oficial【6390795508677556001†L281-L285】
+        [-12.95393, -38.38157], // Piatã - oficial【6390795508677556001†L563-L567】
       ],
       status: 'livre',
       co2: '0.9 kg',
@@ -44,8 +41,8 @@ function App() {
   ];
 
   const [filtro, setFiltro] = useState('todas');
-  const filtradas = filtro === 'todas' ? rotas : rotas.filter(r => r.status === filtro);
-  const cor = (s) => s === 'livre' ? '#16a34a' : s === 'moderado' ? '#f59e0b' : '#dc2626';
+  const filtradas = filtro === 'todas'? rotas : rotas.filter(r => r.status === filtro);
+  const cor = (s) => s === 'livre'? '#16a34a' : s === 'moderado'? '#f59e0b' : '#dc2626';
 
   return (
     <div style={{ fontFamily: 'Arial', padding: '10px' }}>
@@ -57,7 +54,7 @@ function App() {
         <button onClick={() => setFiltro('moderado')} style={{marginLeft:5}}>Moderadas</button>
         <button onClick={() => setFiltro('congestionado')} style={{marginLeft:5}}>Engarrafadas</button>
       </div>
-      <MapContainer center={[-12.94, -38.46]} zoom={12.2} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.94, -38.46]} zoom={12} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {filtradas.map((r, i) => (
           <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={6} opacity={0.95}>
