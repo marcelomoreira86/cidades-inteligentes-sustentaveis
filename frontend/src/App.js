@@ -7,30 +7,32 @@ function App() {
     { nome: 'Av. Paralela', coords: [[-12.912, -38.345], [-12.932, -38.37], [-12.947, -38.398], [-12.962, -38.42], [-12.975, -38.445], [-12.985, -38.465]], status: 'congestionado', co2: '4.2 kg' },
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
-    { nome: 'Suburbana', coords: [[-12.87, -38.466], [-12.90, -38.475], [-12.92, -38.487], [-12.94, -38.494], [-12.97, -38.505]], status: 'livre', co2: '1.2 kg' },
-    // ORLA - ESQUEMA SUBURBANA - 400M PRA DENTRO, 100% NA AVENIDA
+    // SUBURBANA - AGORA CURVADA BEIRANDO A BAÍA
+    { nome: 'Suburbana', coords: [
+      [-12.972, -38.513], // Comércio
+      [-12.950, -38.507], // Calçada / Mares
+      [-12.930, -38.500], // Roma / Boa Vista Lobato
+      [-12.910, -38.492], // Lobato / Plataforma
+      [-12.890, -38.483], // Plataforma / Itacaranha
+      [-12.870, -38.473], // Periperi
+      [-12.850, -38.462], // Paripe / Praia Grande
+      [-12.830, -38.450]  // Base Naval
+    ], status: 'livre', co2: '1.2 kg' },
+    // ORLA - 200M MAIS PRA DENTRO AINDA
     { 
       nome: 'Orla - Barra / Itapuã', 
       coords: [
-        [-13.003, -38.525], // Farol da Barra - DENTRO
-        [-12.998, -38.522], // Morro do Cristo
-        [-13.000, -38.514], // Ondina - Av. Oceânica
-        [-13.003, -38.506], // Ondina / Rio Vermelho
-        [-13.006, -38.498], // Paciência
-        [-13.007, -38.490], // Buracão / Santana
-        [-13.005, -38.482], // Amaralina - quartel
-        [-13.002, -38.473], // Amaralina
-        [-12.998, -38.463], // Pituba - Octávio Mangabeira
-        [-12.993, -38.452], // Praça Namorados
-        [-12.988, -38.442], // Jardim de Alah / Costa Azul
-        [-12.983, -38.433], // Armação
-        [-12.977, -38.424], // Boca do Rio
-        [-12.970, -38.414], // Pituaçu
-        [-12.962, -38.404], // Jaguaribe
-        [-12.955, -38.394], // Patamares
-        [-12.947, -38.383], // Piatã
-        [-12.939, -38.372], // Itapuã
-        [-12.932, -38.361]  // Farol Itapuã - DENTRO
+        [-12.998, -38.520], // Farol Barra - DENTRO
+        [-12.993, -38.515], // Cristo / Ondina
+        [-12.997, -38.502], // Rio Vermelho
+        [-12.996, -38.488], // Buracão
+        [-12.991, -38.472], // Amaralina
+        [-12.985, -38.458], // Pituba
+        [-12.978, -38.443], // Costa Azul / Armação
+        [-12.968, -38.428], // Boca do Rio / Imbuí
+        [-12.956, -38.412], // Pituaçu / Jaguaribe
+        [-12.944, -38.395], // Patamares / Piatã
+        [-12.930, -38.375]  // Itapuã
       ], 
       status: 'livre', 
       co2: '0.9 kg' 
@@ -54,7 +56,7 @@ function App() {
         <button onClick={() => setFiltro('moderado')} style={{marginLeft:5}}>Moderadas</button>
         <button onClick={() => setFiltro('congestionado')} style={{marginLeft:5}}>Engarrafadas</button>
       </div>
-      <MapContainer center={[-12.97, -38.44]} zoom={12} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.92, -38.45]} zoom={11.5} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {filtradas.map((r, i) => (
           <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={7} opacity={0.95}>
