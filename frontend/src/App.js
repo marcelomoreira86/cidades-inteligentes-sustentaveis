@@ -7,30 +7,30 @@ function App() {
     { nome: 'Av. Paralela', coords: [[-12.912, -38.345], [-12.932, -38.37], [-12.947, -38.398], [-12.962, -38.42], [-12.975, -38.445], [-12.985, -38.465]], status: 'congestionado', co2: '4.2 kg' },
     { nome: 'Av. ACM', coords: [[-12.96, -38.48], [-12.97, -38.485], [-12.984, -38.49], [-12.995, -38.47]], status: 'moderado', co2: '2.1 kg' },
     { nome: 'Bonocô', coords: [[-12.956, -38.481], [-12.968, -38.487], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
-    // SUBURBANA - CURTA, SÓ ATÉ PARIPE
+    // SUBURBANA - PERFEITA NA BAÍA
     {
       nome: 'Suburbana',
       coords: [
-        [-12.970, -38.510],
-        [-12.945, -38.504],
-        [-12.920, -38.495],
-        [-12.895, -38.482],
-        [-12.870, -38.470],
-        [-12.845, -38.455],
+        [-12.970, -38.510], // Comércio
+        [-12.945, -38.504], // Calçada / Roma
+        [-12.920, -38.495], // Lobato
+        [-12.895, -38.482], // Plataforma
+        [-12.870, -38.470], // Periperi
+        [-12.845, -38.455], // Paripe
       ],
       status: 'livre',
       co2: '1.2 kg',
     },
-    // ORLA - COORDENADAS OFICIAIS DOS CORREIOS - 100% NA AVENIDA
+    // ORLA - ORDEM CORRIGIDA SUL -> NORTE - LINHA ÚNICA
     {
       nome: 'Orla - Barra / Itapuã',
       coords: [
-        [-12.99636, -38.44289], // Amaralina - oficial【6390795508677556001†L600-L603】
-        [-13.00632, -38.45888], // Pituba - oficial【6390795508677556001†L637-L640】
-        [-12.98803, -38.43578], // Costa Azul - Plaza
-        [-12.95409, -38.38345], // Armação - oficial【6390795508677556001†L227-L230】
-        [-12.96873, -38.40765], // Pituaçu - oficial【6390795508677556001†L281-L285】
-        [-12.95393, -38.38157], // Piatã - oficial【6390795508677556001†L563-L567】
+        [-13.00632, -38.45888], // 1 Pituba - sul
+        [-12.99636, -38.44289], // 2 Amaralina
+        [-12.98803, -38.43578], // 3 Costa Azul
+        [-12.96873, -38.40765], // 4 Pituaçu / Boca do Rio
+        [-12.95409, -38.38345], // 5 Armação
+        [-12.95393, -38.38157], // 6 Piatã / Itapuã - norte
       ],
       status: 'livre',
       co2: '0.9 kg',
@@ -41,8 +41,8 @@ function App() {
   ];
 
   const [filtro, setFiltro] = useState('todas');
-  const filtradas = filtro === 'todas'? rotas : rotas.filter(r => r.status === filtro);
-  const cor = (s) => s === 'livre'? '#16a34a' : s === 'moderado'? '#f59e0b' : '#dc2626';
+  const filtradas = filtro === 'todas' ? rotas : rotas.filter(r => r.status === filtro);
+  const cor = (s) => s === 'livre' ? '#16a34a' : s === 'moderado' ? '#f59e0b' : '#dc2626';
 
   return (
     <div style={{ fontFamily: 'Arial', padding: '10px' }}>
