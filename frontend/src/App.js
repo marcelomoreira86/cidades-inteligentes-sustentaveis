@@ -13,13 +13,13 @@ function App() {
     // 3. BONOCÔ (laranja)
     { nome: 'Av. Bonocô', coords: [[-12.956, -38.481], [-12.965, -38.485], [-12.978, -38.491]], status: 'moderado', co2: '2.5 kg' },
     // 4. SUBURBANA - Corrigida, sem ir pro mar
-    { nome: 'Av. Suburbana - Paripe', coords: [[-12.841, -38.483], [-12.87, -38.485], [-12.895, -38.487]], status: 'livre', co2: '1.2 kg' },
+    { nome: 'Av. Suburbana - Paripe', coords: [[-12.842, -38.484], [-12.86, -38.486], [-12.875, -38.489], [-12.89, -38492]], status: 'livre', co2: '1.2 kg' },
     { nome: 'Av. Suburbana - Lobato', coords: [[-12.895, -38.487], [-12.912, -38.495], [-12.924, -38.508]], status: 'livre', co2: '1.0 kg' },
     { nome: 'Av. Suburbana - Calçada', coords: [[-12.924, -38.508], [-12.933, -38.505], [-12.94, -38.51]], status: 'moderado', co2: '1.9 kg' },
     // 5. ORLA - Corrigida, seguindo a praia
-    { nome: 'Orla - Itapuã / Piatã', coords: [[-12.95, -38.354], [-12.97, -38.37], [-12.985, -38.40], [-12.995, -38.43]], status: 'livre', co2: '0.9 kg' },
-    { nome: 'Orla - Pituba', coords: [[-12.995, -38.43], [-13.005, -38.45], [-13.012, -38.47]], status: 'livre', co2: '0.8 kg' },
-    { nome: 'Orla - Rio Vermelho / Barra', coords: [[-13.012, -38.47], [-13.015, -38.495], [-13.01, -38.52], [-13.005, -38.535]], status: 'moderado', co2: '1.5 kg' },
+    { nome: 'Orla - Itapuã / Piatã', coords: [[-12.946, -38.362], [-12.962, -38.375], [-12.978, -38.395], [-12.988, -38.415]], status: 'livre', co2: '0.9 kg' },
+    { nome: 'Orla - Pituba / Amaralina', coords: [[-12.988, -38.415], [-12.996, -38.43], [-13.003, -38.445], [-13.009, -38465]], status: 'livre', co2: '0.8 kg' },
+    { nome: 'Orla - Rio Vermelho / Barra', coords: [[-13.009, -38.465], [-13.012, -38.485], [-13.013, -38.505], [-13.006, -38.522], [-12.997, -38.538]], status: 'moderado', co2: '1.5 kg' },
     // 6. CENTRO
     { nome: 'Av. 7 de Setembro - Centro', coords: [[-12.971, -38.512], [-12.974, -38.515], [-12.978, -38.511]], status: 'congestionado', co2: '3.8 kg' },
     { nome: 'Dique do Tororó', coords: [[-12.984, -38.502], [-12.983, -38.508], [-12.979, -38.511]], status: 'moderado', co2: '1.7 kg' },
@@ -47,7 +47,7 @@ function App() {
         <button onClick={() => setFiltro('congestionado')}>Engarrafadas</button>
       </div>
 
-      <MapContainer center={[-12.97, -38.47]} zoom={11} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
+      <MapContainer center={[-12.97, -38.51]} zoom={12} style={{ height: '75vh', width: '100%', borderRadius: '12px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap" />
         {filtradas.map((r, i) => (
           <Polyline key={i} positions={r.coords} color={cor(r.status)} weight={6} opacity={0.9}>
