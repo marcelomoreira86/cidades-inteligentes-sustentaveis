@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { fetchRoadGeometry, fetchFlowColor, midpoint } from './trafficService';
 
 // ⚠️ Cole aqui sua chave GRATUITA da TomTom (developer.tomtom.com -> plano Freemium)
-const TOMTOM_API_KEY = 'eMaHo8a9Dyf4xzmYt0E8FRDjaTAhU24S';
+const TOMTOM_API_KEY = 'eMaHo8a9Dyf4xzmytoE8FRDjaTAhU24S';
 
 // Cada grupo busca a via real no OpenStreetMap pelo nome (regex).
 // Se algum trecho não aparecer, confira como ele está grafado no OpenStreetMap
