@@ -1,103 +1,83 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, Tooltip, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { fetchRoadGeometry, fetchFlowColor, midpoint } from './trafficService';
+import { ROTAS_REAIS, fetchFlowColor, midpoint } from './trafficService';
 
 const TOMTOM_API_KEY = 'eMaHo8a9Dyf4xzmytoE8FRDjaTAhU24S';
 
-const ROTAS = [
-  { id: 'paralela', label: 'Paralela', nameRegex: 'Luis Viana Filho|Paralela' },
-  { id: 'suburbana', label: 'Orla + Suburbana', nameRegex: 'Suburbana|Afranio Peixoto|Octavio Mangabeira' },
-  { id: 'br324', label: 'Todas', nameRegex: 'BR-324|Paralela|Suburbana' }, // usado só para o botão Todas
-];
-
 function AjustarMapa({ coords }) {
   const map = useMap();
-  useEffect(() => {
-    if (coords.length > 2) map.fitBounds(coords, { padding: [20, 20] });
-  }, [coords, map]);
+  useEffect(() => { if (coords.length) map.fitBounds(coords); }, [coords, map]);
   return null;
 }
 
 export default function App() {
-  const [filtro, setFiltro] = useState('br324'); // br324 = Todas
-  const [trafego, setTrafego] = useState({});
+  const [filtro, setFiltro] = useState('todas');
+  const [cores, setCores] = useState({ paralela: '#16a34a', orla: '#16a34a', suburbana: '#16a34a' });
+  const [stats, setStats] = useState({ livre: 2, lento: 0, congestionado: 0, co2: '1.2', status: 'Carregando...' });
   const [carregando, setCarregando] = useState(true);
-  const [stats, setStats] = useState({ livre: 0, lento: 0, congestionado: 0, co2: 0 });
-  const intervalRef = useRef(null);
 
-  const rotasParaMostrar = filtro === 'br324'? ROTAS.slice(0, 2) : ROTAS.filter(r => r.id === filtro);
+  const todasCoords = Object.values(ROTAS_REAIS).flatMap(r => r.coords);
 
   async function atualizarTrafego() {
     setCarregando(true);
-    const novoTrafego = {};
     let livre = 0, lento = 0, congestionado = 0;
-
-    for (const rota of rotasParaMostrar) {
-      try {
-        const trechos = await fetchRoadGeometry(rota.nameRegex);
-        const trechosComCor = [];
-        for (const trecho of trechos.slice(0, 25)) { // pega só 25 pra não travar
-          const [lat, lon] = midpoint(trecho.coords);
-          const cor = await fetchFlowColor(lat, lon, TOMTOM_API_KEY);
-          if (cor === '#16a34a') livre++;
-          else if (cor === '#f59e0b') lento++;
-          else if (cor === '#dc2626') congestionado++;
-          trechosComCor.push({...trecho, cor });
-        }
-        novoTrafego[rota.id] = trechosComCor;
-      } catch (e) {
-        console.error(e);
-        novoTrafego[rota.id] = [];
-      }
+    const novasCores = {};
+    for (const id of Object.keys(ROTAS_REAIS)) {
+      const [lat, lon] = midpoint(ROTAS_REAIS[id].coords);
+      const cor = await fetchFlowColor(lat, lon, TOMTOM_API_KEY);
+      novasCores[id] = cor;
+      if (cor === '#16a34a') livre++;
+      else if (cor === '#f59e0b') lento++;
+      else congestionado++;
     }
-    // Cálculo CO2 simples: cada trecho congestionado = + 0.8kg CO2/h
-    const co2 = (congestionado * 0.8 + lento * 0.3).toFixed(1);
-    setStats({ livre, lento, congestionado, co2 });
-    setTrafego(novoTrafego);
+    setCores(novasCores);
+    const co2 = (congestionado * 2.5 + lento * 0.9 + livre * 0.2).toFixed(1);
+    const status = congestionado >= 2? 'Crítico - Sugerir desvio' : congestionado === 1? 'Atenção - Lento' : 'Fluindo bem - Sustentável';
+    setStats({ livre, lento, congestionado, co2, status });
     setCarregando(false);
   }
 
   useEffect(() => {
     atualizarTrafego();
-    intervalRef.current = setInterval(atualizarTrafego, 5 * 60 * 1000);
-    return () => clearInterval(intervalRef.current);
-  }, [filtro]);
+    const t = setInterval(atualizarTrafego, 60000); // atualiza a cada 1 min
+    return () => clearInterval(t);
+  }, []);
 
-  const todasCoords = Object.values(trafego).flat().flatMap(t => t.coords);
+  const rotasFiltradas = filtro === 'todas'? Object.keys(ROTAS_REAIS) : [filtro];
 
   return (
-    <div style={{ fontFamily: 'Arial' }}>
-      <h2 style={{ textAlign: 'center', margin: '10px 0' }}>Cidades Inteligentes - Salvador</h2>
-      <p style={{ textAlign: 'center', margin: 0 }}>Legenda: <span style={{color:'#16a34a'}}>● Verde=livre</span> <span style={{color:'#dc2626'}}>● Vermelho=Paralela engarrafada</span> {carregando && ' | Carregando tráfego...'}</p>
+    <div style={{ fontFamily: 'Arial', padding: 5 }}>
+      <h3 style={{ textAlign: 'center', margin: '5px 0' }}>Cidades Inteligentes - Salvador</h3>
+      <p style={{ textAlign: 'center', margin: '5px 0', fontSize: 14 }}>
+        <span style={{ color: '#16a34a' }}>● Verde=livre</span> <span style={{ color: '#f59e0b' }}>● Amarelo=moderado</span> <span style={{ color: '#dc2626' }}>● Vermelho=engarrafado</span>
+        {carregando && ' | Atualizando...'}
+      </p>
 
-      <div style={{ textAlign: 'center', margin: '10px 0' }}>
-        <button onClick={() => setFiltro('br324')} style={{margin:2, background: filtro==='br324'?'#333':'#ddd', color: filtro==='br324'?'white':'black'}}>Todas</button>
-        <button onClick={() => setFiltro('suburbana')} style={{margin:2, background: filtro==='suburbana'?'#333':'#ddd', color: filtro==='suburbana'?'white':'black'}}>Orla + Suburbana</button>
-        <button onClick={() => setFiltro('paralela')} style={{margin:2, background: filtro==='paralela'?'#333':'#ddd', color: filtro==='paralela'?'white':'black'}}>Paralela</button>
-        <button onClick={atualizarTrafego} style={{marginLeft:10}}>🔄 Atualizar</button>
+      <div style={{ textAlign: 'center', marginBottom: 8 }}>
+        <button onClick={() => setFiltro('todas')} style={{ margin: 3, padding: '5px 10px', background: filtro === 'todas'? '#111' : '#eee', color: filtro === 'todas'? '#fff' : '#000' }}>Todas</button>
+        <button onClick={() => setFiltro('orla')} style={{ margin: 3, padding: '5px 10px', background: filtro === 'orla'? '#111' : '#eee', color: filtro === 'orla'? '#fff' : '#000' }}>Livres</button>
+        <button onClick={() => setFiltro('paralela')} style={{ margin: 3, padding: '5px 10px', background: filtro === 'paralela'? '#111' : '#eee', color: filtro === 'paralela'? '#fff' : '#000' }}>Engarrafadas</button>
+        <button onClick={atualizarTrafego} style={{ marginLeft: 8 }}>🔄</button>
       </div>
 
-      {/* PAINEL SUSTENTABILIDADE DE VOLTA */}
-      <div style={{ display:'flex', justifyContent:'center', gap:15, marginBottom:10, flexWrap:'wrap' }}>
-        <div style={{ border:'1px solid #ccc', padding: '8px 15px', borderRadius:8, background:'#f0fdf4' }}>✅ Trechos Livres: <b>{stats.livre}</b></div>
-        <div style={{ border:'1px solid #ccc', padding: '8px 15px', borderRadius:8, background:'#fffbeb' }}>⚠️ Lentos: <b>{stats.lento}</b></div>
-        <div style={{ border:'1px solid #ccc', padding: '8px 15px', borderRadius:8, background:'#fef2f2' }}>🚗 Congestionados: <b>{stats.congestionado}</b></div>
-        <div style={{ border:'1px solid #16a34a', padding: '8px 15px', borderRadius:8, background:'#dcfce7' }}>🌱 CO₂ Estimado: <b>{stats.co2} kg/h</b></div>
+      {/* PAINEL SUSTENTABILIDADE EM TEMPO REAL */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
+        <div style={{ border: '1px solid #16a34a', padding: '6px 10px', borderRadius: 6, background: '#f0fdf4', fontSize: 13 }}>✅ Livres: <b>{stats.livre}</b></div>
+        <div style={{ border: '1px solid #f59e0b', padding: '6px 10px', borderRadius: 6, background: '#fffbeb', fontSize: 13 }}>⚠️ Lentos: <b>{stats.lento}</b></div>
+        <div style={{ border: '1px solid #dc2626', padding: '6px 10px', borderRadius: 6, background: '#fef2f2', fontSize: 13 }}>🚗 Engarrafados: <b>{stats.congestionado}</b></div>
+        <div style={{ border: '2px solid #16a34a', padding: '6px 10px', borderRadius: 6, background: '#dcfce7', fontSize: 13 }}>🌱 CO₂/h: <b>{stats.co2} kg</b> | {stats.status}</div>
       </div>
 
-      <MapContainer center={[-12.95, -38.45]} zoom={11} style={{ height: '65vh', width: '100%' }}>
+      <MapContainer center={[-12.93, -38.45]} zoom={11} style={{ height: '60vh', width: '100%' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {todasCoords.length > 0 && <AjustarMapa coords={todasCoords} />}
-        {Object.entries(trafego).map(([rotaId, trechos]) =>
-          trechos.map((trecho) => (
-            <Polyline key={`${rotaId}-${trecho.id}`} positions={trecho.coords} color={trecho.cor} weight={6} opacity={0.9}>
-              <Tooltip>{trecho.name} - {trecho.cor === '#16a34a'? 'Livre' : trecho.cor === '#f59e0b'? 'Lento' : 'Congestionado'}</Tooltip>
-            </Polyline>
-          ))
-        )}
+        <AjustarMapa coords={todasCoords} />
+        {rotasFiltradas.map(id => (
+          <Polyline key={id} positions={ROTAS_REAIS[id].coords} color={cores[id]} weight={7} opacity={0.9}>
+            <Tooltip>{ROTAS_REAIS[id].label} - {cores[id] === '#16a34a'? 'livre' : cores[id] === '#f59e0b'? 'moderado' : 'engarrafado'}</Tooltip>
+          </Polyline>
+        ))}
       </MapContainer>
-      <p style={{textAlign:'center', fontSize:12, marginTop:5}}><b>Inteligência:</b> Se CO₂ &gt; 10kg/h, sugerir rota alternativa pela Suburbana. Dados via TomTom + OpenStreetMap.</p>
     </div>
   );
 }
