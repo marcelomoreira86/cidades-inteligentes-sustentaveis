@@ -1,4 +1,7 @@
-// Geometria REAL já com curvas - não precisa do Overpass
+// Geometria das vias definida manualmente (sem Overpass).
+// ⚠️ Confira estes pontos contra o mapa real antes de usar em produção —
+// em especial a "suburbana", cuja longitude parece ir na direção contrária
+// à de Periperi (ver observação no chat).
 export const ROTAS_REAIS = {
   paralela: {
     label: 'Paralela',
@@ -28,16 +31,16 @@ export async function fetchFlowColor(lat, lon, apiKey) {
   const url = `https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=${apiKey}&point=${lat},${lon}`;
   try {
     const res = await fetch(url);
-    if (!res.ok) return '#9ca3af';
+    if (!res.ok) return '#9ca3af'; // sem dado
     const data = await res.json();
     const seg = data.flowSegmentData;
-    if (!seg) return '#9ca3af';
+    if (!seg || !seg.freeFlowSpeed) return '#9ca3af'; // sem dado (evita NaN)
     const ratio = seg.currentSpeed / seg.freeFlowSpeed;
     if (ratio > 0.75) return '#16a34a'; // livre
     if (ratio > 0.4) return '#f59e0b'; // moderado
     return '#dc2626'; // engarrafado
   } catch {
-    return '#16a34a'; // se falhar, mostra verde mas CURVO
+    return '#9ca3af'; // falha na chamada = sem dado, nunca "livre" por padrão
   }
 }
 
